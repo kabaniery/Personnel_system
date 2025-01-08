@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "N8fgR4BSPG5cTydgGkpkfuaqDS9sTGQrbBmZpbuTmlI=",
+  "Source": "PersonnelSystem.Api",
+  "BasePath": "_content/PersonnelSystem.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
