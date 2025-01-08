@@ -286,3 +286,5 @@ C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Api\obj\Debug\net8.0\st
 C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Api\obj\Debug\net8.0\Personne.6EBCB3E5.Up2Date
 C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Api\obj\Debug\net8.0\PersonnelSystem.Api.genruntimeconfig.cache
 C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Api\obj\Debug\net8.0\ref\PersonnelSystem.Api.dll
+C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Api\obj\Debug\net8.0\PersonnelSystem.Api.sourcelink.json
+C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

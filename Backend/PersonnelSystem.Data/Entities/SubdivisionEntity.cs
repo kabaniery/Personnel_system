@@ -18,7 +18,7 @@ namespace PersonnelSystem.Data.Entities
 
         public ICollection<SubdivisionEntity> Childs { get; set; } = new List<SubdivisionEntity>();
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now.ToUniversalTime().Date;
 
         public List<DateWorkedEntity> Dates {  get; set; } = new List<DateWorkedEntity>();
     }

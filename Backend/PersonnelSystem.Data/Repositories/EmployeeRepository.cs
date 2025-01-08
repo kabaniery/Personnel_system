@@ -55,6 +55,7 @@ namespace PersonnelSystem.Data.Repositories
 
             await _context.Employees.AddAsync(entity);
             await _context.SaveChangesAsync();
+            employee.Id = entity.Id;
             return entity.Id;
         }
 
@@ -84,11 +85,6 @@ namespace PersonnelSystem.Data.Repositories
                 return null;
             }
             return Employee.CreateEmployee(employee.Id, employee.Name, employee.SubdivisionId).Employee;
-        }
-
-        public Task<int> Create(string name, int? subdivisionId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

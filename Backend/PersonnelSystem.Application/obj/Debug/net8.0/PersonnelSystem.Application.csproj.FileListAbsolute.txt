@@ -28,3 +28,4 @@ C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Application\bin\Debug\n
 C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Application\bin\Debug\net8.0\PersonnelSystem.Core.pdb
 C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Application\obj\Debug\net8.0\Personne.FE401CCE.Up2Date
 C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Application\obj\Debug\net8.0\ref\PersonnelSystem.Application.dll
+C:\projects\CSharp\Test_solution\Backend\PersonnelSystem.Application\obj\Debug\net8.0\PersonnelSystem.Application.sourcelink.json

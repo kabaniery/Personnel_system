@@ -1,0 +1,80 @@
+[
+  {
+    "ContainingType": "PersonnelSystem.Api.Controllers.ReactController",
+    "Method": "CheckAuthorize",
+    "RelativePath": "api/React/checkme",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonnelSystem.Api.Controllers.ReactController",
+    "Method": "CreateEmployee",
+    "RelativePath": "api/React/employee/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employee",
+        "Type": "PersonnelSystem.Api.Records.CreateEmployee",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonnelSystem.Api.Controllers.ReactController",
+    "Method": "GetEmployeesBySubdivisionAndDate",
+    "RelativePath": "api/React/employee/bydate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subdivisionId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "start",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "end",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonnelSystem.Api.Controllers.ReactController",
+    "Method": "GetAllSubdivisions",
+    "RelativePath": "api/React/subdivision/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonnelSystem.Api.Controllers.ReactController",
+    "Method": "GetSubdivisionByDate",
+    "RelativePath": "api/React/subdivision/bydate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

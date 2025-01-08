@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PersonnelSystem.Core.Model;
 using PersonnelSystem.Data.Entities;
 
@@ -12,9 +13,11 @@ namespace PersonnelSystem.Data.Repositories
     public class DateRepository : IDateRepository
     {
         private readonly PersonnelDbContext _context;
-        public DateRepository(PersonnelDbContext context)
+        private ILogger<DateRepository> _logger;
+        public DateRepository(PersonnelDbContext context, ILogger<DateRepository> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<DateWorked> Generate(Employee employee, Subdivision subdivision)
@@ -23,7 +26,7 @@ namespace PersonnelSystem.Data.Repositories
             {
                 EmployeeId = employee.Id,
                 SubdivisionId = subdivision.Id,
-                TimeStarted = DateTime.Now,
+                TimeStarted = DateTime.Now.ToUniversalTime().Date,
                 TimeFinished = null
             };
             await _context.Dates.AddAsync(entity);
@@ -38,8 +41,8 @@ namespace PersonnelSystem.Data.Repositories
             await _context.Dates
                 .Where(d => d.ID == dateWorked.ID)
                 .ExecuteUpdateAsync(s => s
-                .SetProperty(b => b.TimeStarted, dateWorked.TimeStarted)
-                .SetProperty(b => b.TimeFinished, dateWorked.TimeFinished));
+                .SetProperty(b => b.TimeStarted, dateWorked.TimeStarted.ToUniversalTime())
+                .SetProperty(b => b.TimeFinished, dateWorked.TimeFinished == null ? null : dateWorked.TimeFinished.Value.ToUniversalTime()));
             return dateWorked.ID;
         }
 
@@ -62,16 +65,17 @@ namespace PersonnelSystem.Data.Repositories
 
         public async Task<List<DateWorked>> FindBySubdivisionAndTime(Subdivision subdivision, DateTime start, DateTime end)
         {
-            return await _context.Dates
+            var result = await _context.Dates
                 .AsNoTracking()
                 .Where(d => d.SubdivisionId == subdivision.Id && (d.TimeFinished == null || d.TimeFinished >= start) && d.TimeStarted <= end)
                 .Select(d => DateWorked.CreateDate(
-                    d.ID,
-                    Employee.CreateEmployee(d.Employee.Id, d.Employee.Name, d.Employee.SubdivisionId).Employee,
-                    subdivision,
-                    d.TimeStarted,
-                    d.TimeFinished).Date)
+                        d.ID,
+                        Employee.CreateEmployee(d.Employee.Id, d.Employee.Name, d.Employee.SubdivisionId).Employee,
+                        subdivision,
+                        d.TimeStarted,
+                        d.TimeFinished).Date)
                 .ToListAsync();
+            return result;
         }
     }
 }

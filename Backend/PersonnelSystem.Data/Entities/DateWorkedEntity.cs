@@ -14,7 +14,7 @@ namespace PersonnelSystem.Data.Entities
         public EmployeeEntity Employee { get; set; }
         public int SubdivisionId { get; set; }
         public SubdivisionEntity Subdivision { get; set; }
-        public DateTime TimeStarted { get; set; } = DateTime.Now;
+        public DateTime TimeStarted { get; set; } = DateTime.Now.ToUniversalTime().Date;
         public DateTime? TimeFinished { get; set; }
     }
 }

@@ -67,7 +67,15 @@ namespace PersonnelSystem.Data.Repositories
         public async Task<List<Subdivision>> GetBy(DateTime date)
         {
             return await _context.Subdivisions
-                .Where(s => s.CreatedAt == date)
+                .Where(s => s.CreatedAt == date.ToUniversalTime())
+                .Select(s => Subdivision.CreateSubdivision(s.Id, s.Name, s.CreatedAt).Subdivision)
+                .ToListAsync();
+        }
+
+        public async Task<List<Subdivision>> GetAll()
+        {
+            return await _context.Subdivisions
+                .AsNoTracking()
                 .Select(s => Subdivision.CreateSubdivision(s.Id, s.Name, s.CreatedAt).Subdivision)
                 .ToListAsync();
         }

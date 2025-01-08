@@ -33,7 +33,7 @@ namespace PersonnelSystem.Core.Model
         {
             if (_timeFinished != null)
             {
-                _timeFinished = DateTime.Now;
+                _timeFinished = DateTime.Now.ToUniversalTime().Date;
                 return true;
             }
             return false;

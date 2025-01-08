@@ -1,4 +1,5 @@
-﻿using PersonnelSystem.Core.Model;
+﻿using System.Text.Json.Nodes;
+using PersonnelSystem.Core.Model;
 using PersonnelSystem.Data.Repositories;
 
 namespace PersonnelSystem.Application.Services
@@ -40,6 +41,47 @@ namespace PersonnelSystem.Application.Services
         public async Task<List<Employee>> FindEmployeesBySubdivision(Subdivision subdivision)
         {
             return await _employeeRepository.GetBySubdivision(subdivision.Id);
+        }
+
+        public async Task<List<Subdivision>> FindAllSubdivision()
+        {
+            return await _subdivisionRepository.GetAll();
+        }
+        private async Task<JsonObject> _getFullCompanyInfo(Subdivision subdivision, int level = 0)
+        {
+            JsonObject companyInfo = new JsonObject();
+            companyInfo.Add("id", subdivision.Id);
+            companyInfo.Add("name", subdivision.Name);
+            List<int> employees = (await _employeeRepository.GetBySubdivision(subdivision.Id)).Select(e => e.Id).ToList();
+            JsonArray employeesJson = new JsonArray();
+            foreach (int e in employees)
+            {
+                employeesJson.Add(e);
+            }
+            companyInfo.Add("employees", employeesJson);
+
+            List<Subdivision> childs = await _subdivisionRepository.GetChilds(subdivision.Id);
+            JsonArray childsJson = new JsonArray();
+            if (level > 7)
+            {
+                companyInfo.Add("childs", childsJson);
+                return companyInfo;
+            }
+            foreach (Subdivision child in childs)
+            {
+                childsJson.Add(_getFullCompanyInfo(child, level + 1));
+            }
+            companyInfo.Add("childs", childsJson);
+            return companyInfo;
+        }
+        public async Task<JsonArray> GetCompanyStructure()
+        {
+            JsonArray companyStructure = new JsonArray();
+            foreach (Subdivision subdivision in await _subdivisionRepository.GetHead())
+            {
+                companyStructure.Add(_getFullCompanyInfo(subdivision));
+            }
+            return companyStructure;
         }
     }
 }

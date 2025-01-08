@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using PersonnelSystem.Core.Model;
 using PersonnelSystem.Data.Repositories;
 
@@ -13,11 +14,13 @@ namespace PersonnelSystem.Application.Services
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IDateRepository _dateRepository;
         private readonly ISubdivisionRepository _subdivisionRepository;
-        public DateService(IDateRepository dateRepository, ISubdivisionRepository subdivisionRepository, IEmployeeRepository employeeRepository)
+        private readonly ILogger<DateService> _logger;
+        public DateService(IDateRepository dateRepository, ISubdivisionRepository subdivisionRepository, IEmployeeRepository employeeRepository, ILogger<DateService> logger)
         {
             _dateRepository = dateRepository;
             _subdivisionRepository = subdivisionRepository;
             _employeeRepository = employeeRepository;
+            _logger = logger;
         }
 
         public async Task<DateWorked> StoreDate(Employee employee, Subdivision subdivision)
@@ -59,7 +62,7 @@ namespace PersonnelSystem.Application.Services
             {
                 return new List<Employee>();
             }
-            return (await _dateRepository.FindBySubdivisionAndTime(subdivision, start, end))
+            return  (await _dateRepository.FindBySubdivisionAndTime(subdivision, start, end))
                 .Select(d => d.Employee)
                 .ToList();
         }

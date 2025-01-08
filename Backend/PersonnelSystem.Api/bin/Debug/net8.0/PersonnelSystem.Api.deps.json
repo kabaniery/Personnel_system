@@ -717,6 +717,7 @@
       "System.Threading.Channels/7.0.0": {},
       "PersonnelSystem.Application/1.0.0": {
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
           "PersonnelSystem.Core": "1.0.0"
         },
         "runtime": {

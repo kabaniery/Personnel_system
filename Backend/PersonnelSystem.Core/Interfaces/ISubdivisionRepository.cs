@@ -6,6 +6,7 @@ namespace PersonnelSystem.Data.Repositories
     {
         Task<int> Create(Subdivision subdivision);
         Task<Subdivision?> Find(int id);
+        Task<List<Subdivision>> GetAll();
         Task<List<Subdivision>> GetBy(DateTime date);
         Task<List<Subdivision>> GetChilds(int subdivisionId);
         Task<List<Subdivision>> GetHead();
