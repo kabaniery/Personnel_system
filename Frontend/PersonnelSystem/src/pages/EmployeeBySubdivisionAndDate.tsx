@@ -88,10 +88,11 @@ const Page: React.FC = () => {
                 let rawResult = "";
                 const employees: Employee[] = response.data;
                 employees.forEach(employee => {
-                    rawResult += employee.name + "<br/>";
+                    rawResult += employee.name + "; ";
                 });
                 setResult(rawResult);
             }
+            setLoading(false);
         }).catch(error => {
             if (error.response) {
                 if (error.response.status === 401) {

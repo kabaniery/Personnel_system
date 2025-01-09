@@ -86,6 +86,7 @@ namespace PersonnelSystem.Application.Services
                 await _dateRepository.Update(date);
             }
             await _employeeRepository.Update(employee.Id, employee.Name, subdivision.Id);
+            await _dateRepository.Generate(employee, subdivision);
             return string.Empty;
         }
     }
